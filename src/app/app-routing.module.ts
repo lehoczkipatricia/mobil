@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'toknow', component: ToknowComponent },
   { path: 'shelters', component: SheltersComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
   { path: '', redirectTo: 'main', pathMatch: 'full' }, 
   { path: '**', component:  NopageComponent}
 ];

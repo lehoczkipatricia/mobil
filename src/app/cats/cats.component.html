@@ -14,14 +14,24 @@ style="
 
 
   <div class="card-deck row">
-    <div class="card col-lg-4 p-2" *ngFor="let cat of cats" >
+    <div class="card col-lg-4 p-2" *ngFor="let pet of cats">
       <img src= "../../assets/cat2.jpg" class="card-img-top" alt="Card image cap">
-      
+      <!-- <img src= "http://localhost:8000/{{pet.picture_path}}" class="card-img-top img-thumbnail" id="cat-picture" alt="Card image cap"> -->
+
       <div class="card-body" >
-        
-        <h5 class="card-title">{{cat.name}}</h5>
-        <p class="card-text">{{cat.age}}</p>
-        <p class="card-text">{{cat.gender}}</p>
+
+
+        <a href="">
+          <h5 class="card-title">{{pet.name}}</h5>
+        </a>
+        <p class="card-text">{{pet.bname}}</p>
+        <p class="card-text">{{pet.age}} éves</p>
+        <div *ngIf="pet.gender == false">
+          <p class="card-text">hím</p>
+        </div>
+        <div *ngIf="pet.gender == true">
+          <p class="card-text">nőstény</p>
+      </div>
       </div>
     </div>
   </div>

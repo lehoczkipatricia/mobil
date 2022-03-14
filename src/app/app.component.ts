@@ -15,7 +15,7 @@ export class AppComponent {
   loginForm !: FormGroup
 
   constructor(
-    private auth: AuthService,
+    public auth: AuthService,
     private formBuilder: FormBuilder,
     private router: Router
     ) { }
@@ -25,6 +25,10 @@ export class AppComponent {
       username: [''],
       password: ['']
     });
+  }
+
+  isLoggedIn() {
+    return this.auth.isLoggedIn()
   }
 
   login() {
@@ -48,4 +52,11 @@ export class AppComponent {
     })
 
   }
+
+  logout(){
+    this.auth.logout();
+  }
+
+  
+
 }

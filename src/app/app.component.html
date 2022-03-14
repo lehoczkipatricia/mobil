@@ -1,104 +1,126 @@
+<div class="main-bg" style="background-color: #ffcccc; background-image: linear-gradient(to right, #ffcccc, #99d6ff);">
+  <nav class="navbar navbar-expand-lg navbar-light justify-content-center mx-auto"
+    style="background-image: linear-gradient(to left, #ffcccc, #99d6ff); width: 80%">
+    <div class="container-fluid">
+      <a class="navbar-brand navbar-brand-sm text-muted" href="/main">
+        <h2 class="display-4">FogadjÖrökbe</h2>
+      </a>
 
-    
-    <div class="main-bg" style="background-color: #ffcccc; background-image: linear-gradient(to right, #ffcccc, #99d6ff);">
-    <nav class="navbar navbar-expand-lg navbar-light justify-content-center mx-auto" style="background-image: linear-gradient(to left, #ffcccc, #99d6ff); width: 80%">
-      <div class="container-fluid">
-        <a class="navbar-brand navbar-brand-sm text-muted" href="/main"><h2 class="display-4">FogadjÖrökbe</h2></a>
-    
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class= "navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/main">Főoldal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/cats">Macskák</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/dogs">Kutyák</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link"></a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" routerLink="/toknow" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Tudnivalók
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" routerLink="/toknow">Tippek, tanácsok</a>
+              <a class="dropdown-item" routerLink="/toknow">Örökbefogadási feltételek</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" routerLink="/shelters">Hol vannak menhelyek?</a>
+            </div>
+          </li>
+
+
+
+        </ul>
+      </div>
+      <div class="justify-content-end">
+        <div *ngIf="!isLoggedIn()">
           <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/main">Főoldal</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/cats">Macskák</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" routerLink="/dogs">Kutyák</a>
-            </li>
-            
-            <li class="nav-item">
-              <a class="nav-link" ></a>
-            </li>
-    
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" routerLink="/toknow" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Tudnivalók
+
+              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                Bejelentkezés
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" routerLink="/toknow" >Tippek, tanácsok</a>
-                <a class="dropdown-item" routerLink="/toknow">Örökbefogadási feltételek</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" routerLink="/shelters">Hol vannak menhelyek?</a>
+              <div class="dropdown-menu dropdown-large logindiv">
+                <form [formGroup]="loginForm" (ngSubmit)="login()" class="form-horizontal pb-2" method="post"
+                  accept-charset="UTF-8">
+
+
+
+
+                  <h6 style="padding-bottom: 5px;">Jelentkezz be!</h6>
+                  <input class="form-control" type="text" formControlName="username" width="100px"
+                    placeholder="Név.."><br>
+                  <input class="form-control" type="password" formControlName="password" placeholder="Jelszó.."><br>
+                  <button type="button" type="submit" name="submit" value="login"
+                    class="btn btn-secondary">Bejelentkezés</button>
+                  <hr>
+                  <h6 style="padding-top: 5px; padding-bottom: 5px;">Nincs még felhasználói fiókod?</h6>
+                  <button type="button" routerLink="/register" class="btn btn-secondary">Regisztráció</button>
+                  
+
+
+
+                </form>
               </div>
             </li>
-          
-            
-              
+
           </ul>
-          </div>
-          <div class="justify-content-end">
-            <ul class="navbar-nav">
-          <li class="nav-item dropdown">
+        </div>
 
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Bejelentkezés
-            </a>
-            <div class="dropdown-menu dropdown-large logindiv"  >
-                <form  [formGroup]="loginForm" (ngSubmit)="login()" class="form-horizontal pb-2" method="post" accept-charset="UTF-8">
 
-                
+        <div *ngIf="isLoggedIn()">
+          <ul class="navbar-nav">
+          <li class="nav-item">
+            <button type="button" (click)="logout()" class="btn btn-secondary">Kijelentkezés</button>
 
-                  
-                  <h6 style="padding-bottom: 5px;">Jelentkezz be!</h6>
-                    <input class="form-control" type="text" formControlName="username" width="100px" placeholder="Név.."><br>
-                    <input class="form-control" type="password" formControlName="password" placeholder="Jelszó.."><br>
-                    <button type="button" type="submit" name="submit" value="login" class="btn btn-secondary">Bejelentkezés</button>
-                 <hr>
-                    <h6 style="padding-top: 5px; padding-bottom: 5px;">Nincs még felhasználói fiókod?</h6>
-                    <button type="button" routerLink="/register" class="btn btn-secondary">Regisztráció</button>
-                    
-                
-              
-                </form>
-            </div>
-            </li>
-
-</ul>
-           </div> 
-
-          
+          </li>
+          </ul>
+        </div>
       </div>
-    </nav>
 
 
-    
-    
-    <div class="mx-auto justify-content-center pb-5" style="width: 80%; margin: auto;">
-      <router-outlet></router-outlet>
     </div>
-    
-    <!-- class="nav nav-tabs justify-content-center" -->
-    
-    <!-- Footer -->
-    
+  </nav>
 
 
 
-    <div class="footer-basic mx-auto justify-content-center" style="background-color: white; width: 80%">
+
+  <div class="mx-auto justify-content-center pb-5" style="width: 80%; margin: auto;">
+    <router-outlet></router-outlet>
+  </div>
+
+  <!-- class="nav nav-tabs justify-content-center" -->
+
+  <!-- Footer -->
+
+
+
+
+  <div class="footer-basic mx-auto justify-content-center" style="background-color: white; width: 80%">
     <footer>
-      <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+      <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i
+            class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a
+          href="#"><i class="icon ion-social-facebook"></i></a></div>
       <ul class="list-inline">
-          <li class="list-inline-item"><a href="#">Home</a></li>
-          <li class="list-inline-item"><a href="#">Services</a></li>
-          <li class="list-inline-item"><a href="#">About</a></li>
-          <li class="list-inline-item"><a href="#">Terms</a></li>
-          <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+        <li class="list-inline-item"><a href="#">Home</a></li>
+        <li class="list-inline-item"><a href="#">Services</a></li>
+        <li class="list-inline-item"><a href="#">About</a></li>
+        <li class="list-inline-item"><a href="#">Terms</a></li>
+        <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
       </ul>
       <p class="copyright">Company Name © 2018</p>
-  </footer>
-</div>
+    </footer>
+  </div>
 </div>
