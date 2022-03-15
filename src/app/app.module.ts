@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AdminComponent } from './admin/admin.component';
 import { RegisterComponent } from './register/register.component';
+import { CriteriaComponent } from './criteria/criteria.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { RegisterComponent } from './register/register.component';
     ToknowComponent,
     SheltersComponent,
     AdminComponent,
-    RegisterComponent
+    RegisterComponent,
+    CriteriaComponent
   ],
   imports: [
     HttpClientModule,

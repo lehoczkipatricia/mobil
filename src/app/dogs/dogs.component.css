@@ -132,3 +132,13 @@ body{margin-top:20px;
     .single_advisor_profile:focus .single_advisor_details_info p {
         color: #ffffff;
     }
+    body {
+      background-image: url('../../assets/14710.jpg');
+      background-repeat: repeat;
+      background-color: aqua;
+  }
+  #dog-picture{
+    margin: 0 auto;
+    height: 45%;
+    width: 45%;
+  }

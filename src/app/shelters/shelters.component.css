@@ -1,0 +1,22 @@
+#zip-search{
+    margin: 10px;
+    padding: 2px;
+  }
+  #zip-search>input{
+    margin-left: 5px;
+    width: 50px;
+    height: 30px;
+    text-decoration: none;
+  }
+  .menhely>p{
+    margin: 0;
+  }
+  .title{
+    font-size:medium;
+    font-weight: 700;
+  }
+  .title:before{
+    content: '\2022';
+    margin:0 10px
+  }
+  

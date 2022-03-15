@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Pet } from '../shared/pet/pet';
 import { PetsService } from "../shared/pet/pets.service";
-
 @Component({
   selector: 'app-cats',
   templateUrl: './cats.component.html',
   styleUrls: ['./cats.component.css']
 })
 export class CatsComponent implements OnInit {
+
   pets: Pet[] = [];
   cats: Pet[] = [];
   constructor(private petsService: PetsService) {}
@@ -29,3 +29,5 @@ export class CatsComponent implements OnInit {
     })
   }
 }
+
+
