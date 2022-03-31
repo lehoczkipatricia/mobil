@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../shared/auth/auth.service';
+import {NgbDateStruct, NgbCalendar} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-register',
@@ -11,6 +12,9 @@ import { AuthService } from '../shared/auth/auth.service';
 export class RegisterComponent implements OnInit {
 
   registerForm !: FormGroup
+  model!: NgbDateStruct;
+  month!:string;
+  day!:string;
 
   constructor(
     private auth: AuthService,
@@ -28,11 +32,30 @@ export class RegisterComponent implements OnInit {
     });
   }
   register(){
+
+    if (this.model.month <10) {
+      let month1 = this.model.month.toString();
+      this.month = "0"+month1;
+    }else{
+      this.month = this.model.month.toString();
+    }
+
+    if (this.model.day<10 ) {
+      let day1 = this.model.day.toString();
+      this.day = "0"+day1;
+    } else {
+      this.day = this.model.day.toString();
+    }
+    let year = this.model.year.toString();
+
+    let birth = year +"-"+ this.month +"-"+ this.day;
     let email = this.registerForm.value.email;
     let user = this.registerForm.value.user;
     let pass = this.registerForm.value.pass;
     let pass2 = this.registerForm.value.pass2;
-    let birth = this.registerForm.value.birth;
+
+
+    console.log(email, user, pass, pass2, birth)
 
     this.auth.register(user, pass, pass2, email, birth)
     .subscribe(res => {
@@ -48,7 +71,5 @@ export class RegisterComponent implements OnInit {
       }
     })
   }
-  logpage(){
-    this.router.navigate(['main']);
-  }
+
 }

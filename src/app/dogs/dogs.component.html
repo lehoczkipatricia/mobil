@@ -12,21 +12,84 @@ style="
 
 
 
-  <div class="card-deck row">
-    <div class="card col-lg-6 p-1 text-center" *ngFor="let pet of dogs" >
-      <img src= "http://localhost:8000/{{pet.picture_path}}" class="card-img-top img-thumbnail" id="dog-picture" alt="Card image cap">
-      <div class="card-body" >
-          <a href="">
-            <h5 class="card-title">{{pet.name}}</h5>
-          </a>
-          <p class="card-text">{{pet.bname}}</p>
-          <p class="card-text">{{pet.age}} éves</p>
-          <div *ngIf="pet.gender == false">
-            <p class="card-text">hím</p>
+  <div class="container">
+    <div class="card-deck row">
+      <div class="card col-xs-12 col-sm-6 col-lg-3 p-1 text-center mb-2 " *ngFor="let pet of dogs" >
+        <img #path [attr.data-petpath]="pet.picture_path" src= "http://localhost:8000/images/pets/dogs/{{pet.picture_path}}.jpg" class="card-img-top img-thumbnail" id="cat-picture" alt="Card image cap">
+  
+        <div class="card-body" id="dogInfo">
+  
+            <p #name [attr.data-petname]="pet.name" class="card-title">Kutya neve: {{pet.name}}</p>
+            <p #bname [attr.data-petbname]="pet.bname" class="card-text">Kutya fajtája: {{pet.bname}}</p>  
+            <p #age [attr.data-petage]="pet.age"class="card-text">Kora: {{pet.age}} éves</p>
+  
+            <h5 #id [attr.data-petid]="pet.id" class="card-text visually-hidden">{{pet.id}}</h5>
+            <p #gender [attr.data-petgender]="pet.gender" class="visually-hidden">{{pet.gender}}</p>
+            <p #neutered [attr.data-petneutered]="pet.neutered" class="visually-hidden"></p>
+            <p #shelter [attr.data-petshelter]="pet.shelters_id" ></p>
+            <p #sname [attr.data-petsname]="pet.sname" class="visually-hidden"></p>
+  
+            <div *ngIf="pet.gender == true">
+              <p class="card-text">Neme: nőstény</p>
+            </div>
+            <div *ngIf="pet.gender == false">
+              <p class="card-text">Neme: hím</p>
           </div>
-          <div *ngIf="pet.gender == true">
-            <p class="card-text">nőstény</p>
-        </div>
+          <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getPetData(id, bname, path, name, age, gender, neutered, shelter, sname)"
+          class="btn btn-primary mt-2">
+            Bővebb infót szeretnék!
+          </button>
+          
       </div>
     </div>
+  
+  
   </div>
+  </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" >
+      <div class="modal-dialog">
+        <div class="modal-content">
+  
+          <div class="modal-header">
+            <!-- <h5 class="modal-title" id="exampleModalLabel">{{pet.name}}</h5> -->
+            <h5 class="modal-title" id="exampleModalLabel">{{this.petName}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-start d-flex flex-row justify-content-between">
+            
+            <div>
+            <img src= "http://localhost:8000/images/pets/dogs/{{this.petPath}}.jpg" class="card-img-top img-thumbnail" id="dog-picture" alt="Card image cap">
+            </div>
+            <div class="p-4">
+                <p class="">Neve: {{this.petName}}</p>
+                <p class="">Kora: {{this.petAge}} éves</p>
+                <p class="">Fajtája: {{this.petBName}}</p>
+
+                <div *ngIf="this.petGender == false">
+                  <p class="">Neme: hím</p>
+                </div>
+                <div *ngIf="this.petGender == true">
+                  <p class="">Neme: nőstény</p>
+                </div>
+                <div *ngIf="this.petNeutered == false">
+                  <p>Ivartalanított-e: Igen</p>
+                </div>
+                <div *ngIf="this.petNeutered == true">
+                  <p>Ivartalanított-e: Nem</p>
+                </div>
+                
+          </div>
+          </div>
+          <p class="text-center" *ngIf="isLoggedIn()">Ha szeretnéd örökbefogadni a kutyát, nyomj az Örökbefogadom! gombra!</p>
+          <p class="text-center" *ngIf="!isLoggedIn()">Ha szeretnéd örökbefogadni a kutyát, előbb regisztrálj vagy jelentkezz be!!</p>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Bezár</button>
+            <button type="submit" class="btn btn-primary" *ngIf="isLoggedIn()" (click)="adoptDog()" data-bs-dismiss="modal">Örökbefogadom!</button>
+          </div>
+  
+      </div>
+    </div>
+    </div>
+  
+  

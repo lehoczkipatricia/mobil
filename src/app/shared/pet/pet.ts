@@ -6,7 +6,7 @@ export interface Pet {
     age: number;
     gender: boolean;
     adopted: boolean;
-    shelter_id: number;
+    shelters_id: number;
     neutered: boolean;
     picture_path: string;
 }

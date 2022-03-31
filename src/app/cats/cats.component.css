@@ -3,3 +3,9 @@ body {
     background-repeat: repeat;
     background-color: aqua;
 }
+
+.card-img-top {
+
+    max-width: 400px;
+}
+

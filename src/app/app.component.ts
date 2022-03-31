@@ -27,6 +27,10 @@ export class AppComponent {
     });
   }
 
+  isLoggedIn() {
+    return this.auth.isLoggedIn()
+  }
+
   login() {
     let username = this.loginForm.value.username;
     let password = this.loginForm.value.password;
@@ -40,7 +44,7 @@ export class AppComponent {
         localStorage.setItem('currentUser', 
         JSON.stringify({token: res.data.token, name: res.data.name})
         );
-        this.router.navigate(['admin']);
+        this.router.navigate(['main']);
 
       }else {
         alert('Hiba! A belépés sikertelen!')
@@ -48,4 +52,10 @@ export class AppComponent {
     })
 
   }
+
+  logout(){
+    this.auth.logout();
+  }
+
+
 }

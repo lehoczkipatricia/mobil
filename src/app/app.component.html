@@ -19,10 +19,14 @@
             <li class="nav-item">
               <a class="nav-link" routerLink="/dogs">Kutyák</a>
             </li>
-            
+            <div *ngIf="isLoggedIn()">
             <li class="nav-item">
-              <a class="nav-link" ></a>
+              <a class="nav-link" routerLink="/admin">Hozzáadás</a>
             </li>
+            </div>
+            <!-- <li class="nav-item">
+              <a class="nav-link" ></a>
+            </li> -->
     
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" routerLink="/toknow" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -41,53 +45,67 @@
           </ul>
           </div>
           <div class="justify-content-end">
-            <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-
-            <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Bejelentkezés
-            </a>
-            <div class="dropdown-menu dropdown-large logindiv"  >
-                <form  [formGroup]="loginForm" (ngSubmit)="login()" class="form-horizontal pb-2" method="post" accept-charset="UTF-8">
-
-                
-
-                  
-                  <h6 style="padding-bottom: 5px;">Jelentkezz be!</h6>
-                    <input class="form-control" type="text" formControlName="username" width="100px" placeholder="Név.."><br>
-                    <input class="form-control" type="password" formControlName="password" placeholder="Jelszó.."><br>
-                    <button type="button" type="submit" name="submit" value="login" class="btn btn-secondary">Bejelentkezés</button>
-                 <hr>
-                    <h6 style="padding-top: 5px; padding-bottom: 5px;">Nincs még felhasználói fiókod?</h6>
-                    <button type="button" routerLink="/register" class="btn btn-secondary">Regisztráció</button>
-                    
-                
-              
-                </form>
+            <div *ngIf="!isLoggedIn()">
+              <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+    
+                  <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Bejelentkezés
+                  </a>
+                  <div class="dropdown-menu dropdown-large logindiv">
+                    <form [formGroup]="loginForm" (ngSubmit)="login()" class="form-horizontal pb-2" method="post"
+                      accept-charset="UTF-8">
+    
+    
+    
+    
+                      <h6 style="padding-bottom: 5px;">Jelentkezz be!</h6>
+                      <input class="form-control" type="text" formControlName="username" width="100px"
+                        placeholder="Név.."><br>
+                      <input class="form-control" type="password" formControlName="password" placeholder="Jelszó.."><br>
+                      <button type="button" type="submit" name="submit" value="login"
+                        class="btn btn-secondary">Bejelentkezés</button>
+                      <hr>
+                      <h6 style="padding-top: 5px; padding-bottom: 5px;">Nincs még felhasználói fiókod?</h6>
+                      <button type="button" routerLink="/register" class="btn btn-secondary">Regisztráció</button>
+                      
+    
+    
+    
+                    </form>
+                  </div>
+                </li>
+    
+              </ul>
             </div>
-            </li>
-
-</ul>
-           </div> 
-
-          
-      </div>
-    </nav>
-
-
     
     
-    <div class="mx-auto justify-content-center pb-5" style="width: 80%; margin: auto;">
+            <div *ngIf="isLoggedIn()">
+              <ul class="navbar-nav">
+              <li class="nav-item">
+                <button type="button" (click)="logout()" class="btn btn-secondary">Kijelentkezés</button>
+    
+              </li>
+              </ul>
+            </div>
+          </div>
+    
+    
+        </div>
+      </nav>
+    
+    
+    
+    <div class="mx-auto justify-content-center pb-5" style="width: 80%; margin: auto; min-height: 600px;">
       <router-outlet></router-outlet>
     </div>
     
-    <!-- class="nav nav-tabs justify-content-center" -->
     
+
+
     <!-- Footer -->
-    
-
-
-
+ 
     <div class="footer-basic mx-auto justify-content-center" style="background-color: white; width: 80%">
       <footer>
         <!-- <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i
